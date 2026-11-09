@@ -1,0 +1,45 @@
+{
+  "by_chain": {
+    "mainnet": {
+      "bounties_created": 46,
+      "bounties_accepted": 27,
+      "bounties_cancelled": 12,
+      "sum_eth_paid_contributors": "3.381683",
+      "sum_eth_earned_winners_gross": "3.381683",
+      "gross_accepted_amount_wei": 3381683000000000000,
+      "protocol_fees_wei": 84542075000000000,
+      "match_paid_vs_earned": true,
+      "nfts_held_by_protocol_escrow": 380
+    },
+    "arbitrum": {
+      "bounties_created": 161,
+      "bounties_accepted": 113,
+      "bounties_cancelled": 36,
+      "sum_eth_paid_contributors": "2.969041",
+      "sum_eth_earned_winners_gross": "2.969041",
+      "gross_accepted_amount_wei": 2969041000000000000,
+      "protocol_fees_wei": 74226025000000000,
+      "match_paid_vs_earned": true,
+      "nfts_held_by_protocol_escrow": 619
+    },
+    "base": {
+      "bounties_created": 542,
+      "bounties_accepted": 304,
+      "bounties_cancelled": 135,
+      "sum_eth_paid_contributors": "5.56848144252522",
+      "sum_eth_earned_winners_gross": "5.56848144252522",
+      "gross_accepted_amount_wei": 5568481442525220000,
+      "protocol_fees_wei": 139212036063130500,
+      "match_paid_vs_earned": true,
+      "nfts_held_by_protocol_escrow": 3714
+    }
+  },
+  "total": {
+    "sum_eth_paid": "11.91920544252522",
+    "sum_eth_earned": "11.91920544252522",
+    "match": true,
+    "gross_accepted_wei": 11919205442525220000,
+    "fees_wei": 297980136063130500,
+    "wallets": 450
+  }
+}

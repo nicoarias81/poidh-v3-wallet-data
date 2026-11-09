@@ -1,0 +1,5 @@
+__pycache__/
+fetch.log
+kill_fetch.ps1
+data/_base_core.json
+data/_base_nft.json

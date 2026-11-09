@@ -1,0 +1,50 @@
+{
+  "cutoff_ts": 1794110394,
+  "cutoff_iso": "2026-11-08T03:59:54Z",
+  "chains": {
+    "mainnet": {
+      "chain_id": 1,
+      "core": "0xe731dfadbff20542e10d09d26fc71445c70d4232",
+      "nft": "0x9c5f45d5e1382e4058d334d93c6c01442012a4d9",
+      "deploy_guess_block": 25060964,
+      "first_bounty_block": 25091218,
+      "cutoff_block": 26367617,
+      "cutoff_block_ts": 1794110387,
+      "cutoff_block_iso": "2026-11-08T03:59:47Z",
+      "latest_block_at_fetch": 26376170,
+      "core_log_counts": {
+        "BountyCreated": 46,
+        "ClaimCreated": 407,
+        "ClaimAccepted": 27,
+        "BountyJoined": 98,
+        "BountyCancelled": 12,
+        "WithdrawFromOpenBounty": 4,
+        "RefundClaimed": 13
+      },
+      "nft_transfer_count": 435,
+      "rpc_used": "https://ethereum-rpc.publicnode.com"
+    },
+    "arbitrum": {
+      "chain_id": 42161,
+      "core": "0x5555fa783936c260f77385b4e153b9725fef1719",
+      "nft": "0x27e117cc9a8da363442e7bd0618939e3eeeacf6a",
+      "deploy_guess_block": 421434841,
+      "first_bounty_block": 423445058,
+      "cutoff_block": 522271780,
+      "cutoff_block_ts": 1794110394,
+      "cutoff_block_iso": "2026-11-08T03:59:54Z",
+      "latest_block_at_fetch": 522622974,
+      "core_log_counts": {
+        "BountyCreated": 161,
+        "ClaimCreated": 732,
+        "ClaimAccepted": 113,
+        "BountyJoined": 61,
+        "BountyCancelled": 36,
+        "WithdrawFromOpenBounty": 2,
+        "RefundClaimed": 2
+      },
+      "nft_transfer_count": 852,
+      "rpc_used": "https://arb1.arbitrum.io/rpc"
+    }
+  }
+}

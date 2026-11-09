@@ -1,0 +1,35 @@
+{
+  "mainnet": {
+    "bounties_total": 46,
+    "bounties_accepted": 27,
+    "bounties_cancelled": 12,
+    "nft_tokens_seen": 407,
+    "nft_held_by_protocol_escrow": 380,
+    "gross_accepted_wei": 3381683000000000000,
+    "fees_wei": 84542075000000000,
+    "paid_wei": 3381683000000000000,
+    "earned_wei": 3381683000000000000
+  },
+  "arbitrum": {
+    "bounties_total": 161,
+    "bounties_accepted": 113,
+    "bounties_cancelled": 36,
+    "nft_tokens_seen": 732,
+    "nft_held_by_protocol_escrow": 619,
+    "gross_accepted_wei": 2969041000000000000,
+    "fees_wei": 74226025000000000,
+    "paid_wei": 2969041000000000000,
+    "earned_wei": 2969041000000000000
+  },
+  "base": {
+    "bounties_total": 542,
+    "bounties_accepted": 304,
+    "bounties_cancelled": 135,
+    "nft_tokens_seen": 4018,
+    "nft_held_by_protocol_escrow": 3714,
+    "gross_accepted_wei": 5568481442525220000,
+    "fees_wei": 139212036063130500,
+    "paid_wei": 5568481442525220000,
+    "earned_wei": 5568481442525220000
+  }
+}
