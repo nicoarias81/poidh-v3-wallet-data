@@ -5,7 +5,11 @@ with the poidh v3 contracts on **Ethereum mainnet, Arbitrum and Base**, produced
 for [issue #1540](https://github.com/picsoritdidnthappen/poidh-app/issues/1540).
 
 **Main deliverable:** [`output/poidh_v3_wallet_data.csv`](output/poidh_v3_wallet_data.csv) —
-450 unique wallets, 13 columns (see schema below).
+**1,413 unique wallets**, 13 columns (see schema below). The row set is every address
+that appears in any poidh v3 event on the three chains (bounty issuer, open-bounty
+contributor, claim issuer, refund/withdraw participant) plus every current NFT holder,
+so wallets with zero in all value columns are included as **0** rather than omitted.
+450 of those 1,413 have a non-zero value in at least one column.
 **Claim image:** [`chart/poidh_v3_wallets.png`](chart/poidh_v3_wallets.png).
 
 ## Contracts

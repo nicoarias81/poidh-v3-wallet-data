@@ -43,6 +43,8 @@ TOPIC = {
         "WithdrawFromOpenBounty(uint256,address,uint256,uint256,uint256)".encode()).hex(),
     "RefundClaimed": "0x" + __import__("eth_hash.auto", fromlist=["keccak"]).keccak(
         "RefundClaimed(uint256,address,uint256,uint256)".encode()).hex(),
+    "ClaimCreated": "0x" + __import__("eth_hash.auto", fromlist=["keccak"]).keccak(
+        "ClaimCreated(uint256,address,uint256,address,string,string,uint256,string,uint256)".encode()).hex(),
     "ClaimAccepted": "0x" + __import__("eth_hash.auto", fromlist=["keccak"]).keccak(
         "ClaimAccepted(uint256,uint256,address,address,uint256,uint256,uint256,uint256)".encode()).hex(),
     "Transfer": "0x" + __import__("eth_hash.auto", fromlist=["keccak"]).keccak(
@@ -103,6 +105,7 @@ def build_chain(chain):
     accepted = {}          # bounty_id -> {claim_issuer, amount, payout, fee}
     cancelled = set()
     refunds = defaultdict(int)
+    participants = set()   # every address that ever appears in a poidh event
     core = CORE[chain]
 
     for lg in raw["core"]:
@@ -113,26 +116,37 @@ def build_chain(chain):
         if name == "BountyCreated":
             bid = uint(lg["topics"][1])
             issuer = addr_of_topic(lg["topics"][2])
+            participants.add(issuer)
             bounties[bid] = {"issuer": issuer, "created_amount": uint(w[2]),
                              "open": uint(w[4]) == 1, "block": int(lg["blockNumber"], 16)}
+        elif name == "ClaimCreated":
+            participants.add(addr_of_topic(lg["topics"][2]))
+            if w:
+                participants.add(addr_of_topic("0x" + w[0][-40:]))
         elif name == "BountyJoined":
             bid = uint(lg["topics"][1])
             p = addr_of_topic(lg["topics"][2])
+            participants.add(p)
             joined[(bid, p)] += uint(w[0])
         elif name == "WithdrawFromOpenBounty":
             bid = uint(lg["topics"][1])
             p = addr_of_topic(lg["topics"][2])
+            participants.add(p)
             withdrawn[(bid, p)] += uint(w[0])
         elif name == "BountyCancelled":
             bid = uint(lg["topics"][1])
+            participants.add(addr_of_topic(lg["topics"][2]))
             cancelled.add(bid)
         elif name == "RefundClaimed":
             bid = uint(lg["topics"][1])
             p = addr_of_topic(lg["topics"][2])
+            participants.add(p)
             refunds[(bid, p)] += uint(w[0])
         elif name == "ClaimAccepted":
             bid = uint(lg["topics"][1])
             claim_issuer = addr_of_topic(lg["topics"][3])
+            participants.add(claim_issuer)
+            participants.add(addr_of_topic("0x" + w[0][-40:]))
             accepted[bid] = {
                 "claim_issuer": claim_issuer,
                 "bounty_issuer": addr_of_topic("0x" + w[0][-40:]),
@@ -204,6 +218,7 @@ def build_chain(chain):
         "bounties_total": len(bounties),
         "bounties_accepted": len(accepted),
         "bounties_cancelled": len(cancelled & set(bounties.keys())),
+        "participants": len(participants),
         "nft_tokens_seen": len(owners),
         "nft_held_by_protocol_escrow": escrow_count,
         "gross_accepted_wei": sum(a["amount"] for a in accepted.values()),
@@ -213,6 +228,7 @@ def build_chain(chain):
     }
     return {
         "paid": dict(paid), "earned": dict(earned), "nft_counts": dict(nft_counts),
+        "participants": participants,
         "escrow_count": escrow_count, "stats": stats, "paid_rows": paid_rows,
         "accepted": accepted, "bounties": bounties,
     }
@@ -227,7 +243,7 @@ def main():
     wallets = set()
     for chain in CHAINS:
         d = per_chain[chain]
-        wallets |= set(d["paid"]) | set(d["earned"]) | set(d["nft_counts"])
+        wallets |= set(d["paid"]) | set(d["earned"]) | set(d["nft_counts"]) | set(d["participants"])
     wallets = sorted(wallets)
 
     header = [
